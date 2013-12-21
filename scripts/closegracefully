@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# rtorrent
+if [[ -n `pidof rtorrent` ]];then
+	echo "rtorrent is open, time to die (gracefully)...."
+	(kill -2 `pidof rtorrent` &)
+fi
+
+# echo "closing mozilla (if its open)..."
+# (wmctrl -c mozilla &)
+# sometimes it takes a second shot (see below)
+
+# echo "closing swiftfox (if its open)..."
+# (wmctrl -c swiftfox &)
+# sometimes it takes a second shot (see below)
+
+# galeon...
+if [[ -n `pidof galeon` ]];then
+	echo "closing galeon..."
+	(galeon -q &)
+fi
+
+# openoffice.org
+echo "closing openOffice (if its open)..."
+(wmctrl -c OpenOffice &)
+
+# Inkscape
+echo "closing Inkscape (if its open)..."
+(wmctrl -c Inkscape &)
+
+# Gimp
+echo "closing Gimp (if its open)..."
+(wmctrl -c gimp &)
+
+# Pidgin...
+echo "closing pidgin (if its open)..."
+(purple-remote "quit"  &)
+
+# qBittorrent
+echo "Closing qBittorrent (if its open)..."
+(wmctrl -c qBittorrent &)
+
+# mozilla firefox...
+# echo "closing mozilla again (if its open)..."
+# (wmctrl -c mozilla &)
+
+# echo "closing swiftfox (if its open)..."
+# (wmctrl -c swiftfox &)
+
