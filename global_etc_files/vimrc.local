@@ -1,0 +1,259 @@
+"""""""""""""""""""""""""""""""""""""""""
+" My vim config files
+"
+" complete list of keys and commands
+" http://www.dc.turkuamk.fi/docs/soft/vim/vim.html
+"
+
+"""""""""""""""""""""""""""""""""""""""""
+
+" https://github.com/spf13/spf13-vim/blob/master/.vimrc
+
+""""""""""""""""""""
+" General
+"
+set nocompatible " non-vi(old) compat
+filetype on
+filetype plugin on
+filetype indent on
+filetype plugin indent on " Automatically detect file types.
+set backspace=indent,eol,start " backspace for dummys
+
+
+	if !has('win32') && !has('win64')
+		set term=$TERM " Make arrow and other keys work
+	endif
+
+
+	set shortmess+=filmnrxoOtT " abbrev. of messages (avoids 'hit enter')
+	set viewoptions=folds,options,cursor,unix,slash " better unix / windows compatibility
+	set virtualedit=onemore " allow for cursor beyond last character
+
+	set nospell " spell checking on
+	" Setting up the directories {
+
+	au BufWinLeave * silent! mkview "make vim save view (state) (folds, cursor, etc)
+	au BufWinEnter * silent! loadview "make vim load view (state) (folds, cursor, etc)
+
+
+
+
+
+
+
+"""""""""""""""""""""
+" User Interface
+"
+	
+	set mouse=a " automatically enable mouse usage
+
+
+	" fun! s:ToggleMouse()
+    " if !exists("s:old_mouse")
+        " let s:old_mouse = "a"
+    " endif
+
+    " if &mouse == ""
+        " let &mouse = s:old_mouse
+        " echo "Mouse is for Vim (" . &mouse . ")"
+    " else
+        " let s:old_mouse = &mouse
+        " let &mouse=""
+        " echo "Mouse is for terminal"
+    " endif
+	" endfunction
+
+
+	if has('cmdline_info')
+		set ruler " show the ruler
+		set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " a ruler on steroids
+		set showcmd " show partial commands in status line and
+		" selected characters/lines in visual mode
+	endif
+
+
+
+
+
+" Tab completion
+	set wildmenu " show list instead of just completing
+	set wildmode=list:longest,full " command <Tab> completion, list matches, then longest common part, then all.
+	set wildignore=.svn,CVS,.git,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif
+	
+
+	set whichwrap=b,s,h,l,<,>,[,] " backspace and cursor keys wrap to
+	
+	set scrolljump=5 " lines to scroll when cursor leaves screen
+	set scrolloff=3 " minimum lines to keep above and below cursor
+	
+
+	" set gdefault " the /g flag on :s substitutions by default
+
+
+
+
+
+
+
+"""""""""""""""""
+"  Key mapping
+"
+
+"The default leader is '\', but many people prefer ',' as it's in a standard
+"location
+	let mapleader = ','
+
+" Making it so ; works like : for commands. Saves typing and eliminates :W style typos due to lazy holding shift.
+	nnoremap ; :
+
+" Stupid shift key fixes
+	" cmap W w
+	cmap WQ wq
+	cmap wQ wq
+	" cmap Q q
+	cmap Tabe tabe
+
+"clearing highlighted search
+    nmap <silent> <leader>/ :nohlsearch<CR>
+
+" makes the space bar work like less and more
+"noremap <Space> <PageDown>
+
+" copy entire page in buffer
+map <F4> ggVG<Esc>
+
+"next, like other progs
+map <F3> n
+
+" Spelling
+map <F8> :setlocal spell! spelllang=en_us<CR>
+
+
+" Toggle white-space indication
+nmap  <silent> <F9> :set list!<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""
+" Visual Display
+"
+
+	" set background=dark " Assume a dark background
+	colorscheme elflord " darkish, greenish scheme
+	set number " display line num
+	set linespace=0 " No extra spaces between rows
+	set nu " Line numbers on
+	syntax on " syntax highlighting
+	set visualbell
+	set title " Set xterm title
+	set winminheight=0 " windows can be 0 line high
+	set foldenable " auto fold code
+
+" StatusLine
+	if has('statusline')
+        	set laststatus=2
+		" Broken down into easily includeable segments
+		set statusline=%<%f\ " Filename
+		set statusline+=%w%h%m%r " Options
+
+		set statusline+=\ [%{&ff}/%Y] " filetype
+		set statusline+=\ [%{getcwd()}] " current dir
+		"set statusline+=\ [A=\%03.3b/H=\%02.2B] " ASCII / Hexadecimal value of char
+		set statusline+=%=%-14.(%l,%c%V%)\ %p%% " Right aligned file nav info
+	endif
+
+
+
+"""""""""""""""""""""""""""""""""""""""
+" Searching
+"
+	set wrapscan " search around end of file
+	set incsearch " Display match search pattern when halfway typing it
+	set smartcase "Only ignore case when we type lower case when searching
+	set ruler "Always show cursor position
+	set hlsearch " highlight search terms
+	set magic " better regex
+
+
+
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+"    Programming stuff
+"
+
+set showmatch " show matching brackets
+set mat=5 " how many tenths of a second to blink matching brackets for
+set tabstop=4
+set shiftwidth=4 " indent/outdent by four columns
+set nolist
+set listchars=tab:>.,trail:.,extends:#,nbsp:.,eol:$ " Highlight problematic whitespace
+set autoindent
+
+
+
+
+
+
+
+
+
+"""""""""""""""""""
+" Nerd Commenter
+"
+
+	let NERDSpaceDelims = 1
+	let NERDShutUp = 1
+	let NERDCreateDefaultMappings = 0
+	let NERDCommentWholeLinesInVMode=1
+	let NERDSpaceDelims = 1
+	map <F5> <plug>NERDCommenterToggle 
+	imap <F5> <Esc><plug>NERDCommenterToggle<Space><Right>i
+	" vmap <F5> <plug>NERDCommenterToggle
+	" map <F5> \c<Space>
+	" imap <F5> <Esc>\c<Space><Right>i
+
+
+
+
+
+""""""""""""""""""""""""""""""""""""""
+" Backup Dir and Folders
+"
+
+	set backup " backups are nice ...
+	set undofile " so is persistent undo ...
+	set undolevels=1000 "maximum number of changes that can be undone
+	set undoreload=10000 "maximum number lines to save for undo on a buffer reload
+	set history=1000 " Store a ton of history (default is 20)
+
+"	creates backup/viewdir/swapdir if they dont exist
+"	located at ~/.vim/vimbackup
+function! InitializeDirectories()
+  let separator = "."
+  let parent = $HOME
+  let prefix = '.vim/vim'
+  let dir_list = {
+              \ 'backup': 'backupdir',
+              \ 'views': 'viewdir',
+              \ 'swap': 'directory' }
+
+  for [dirname, settingname] in items(dir_list)
+      let directory = parent . '/' . prefix . dirname . "/"
+      if exists("*mkdir")
+          if !isdirectory(directory)
+              call mkdir(directory)
+          endif
+      endif
+      if !isdirectory(directory)
+          echo "Warning: Unable to create backup directory: " . directory
+          echo "Try: mkdir -p " . directory
+      else  
+          let directory = substitute(directory, " ", "\\\\ ", "")
+          exec "set " . settingname . "=" . directory
+      endif
+  endfor
+endfunction
+call InitializeDirectories()
+
