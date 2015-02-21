@@ -61,7 +61,7 @@ sub renamer {
 		$oldname =~ s/($removal)/./i;
 	}
 	
-	$oldname =~ s/[-_,\'\[\]\(\)\.\s]/./g; #all special chars to .
+	$oldname =~ s/[-_,\'\[\]\(\)\.\s\!]/./g; #all special chars to .
 	$oldname =~ tr/A-Z/a-z/; #lowercase
 	
 	foreach $removal (@commonRemoval) { #remove all the common tags

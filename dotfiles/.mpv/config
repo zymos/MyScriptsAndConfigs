@@ -1,0 +1,58 @@
+# vim: syntax=config
+
+term-status-msg="Time: ${=time-pos}"
+
+#######################
+# mpv Window 
+#
+
+# Window position
+geometry="600+0+10" # I like the top left corner, and firefox on the top right
+
+########################
+# Cache
+#
+
+
+# Use 8MB input cache by default. The cache is enabled for network streams only.
+#cache-default=8192
+#
+# Use 8MB input cache for everything, even local files.
+cache=32768
+#
+# If a seek is issued, and the target is 1024KB past the cached range, then
+# keep reading until the seek target is hit, instead of doing a real seek.
+cache-seek-min=1024
+#
+# Disable the behavior that the player will pause if the cache goes below a
+# certain fill size.
+cache-pause=no
+#
+# Read ahead about 5 seconds of audio and video packets.
+demuxer-readahead-secs=5.0
+
+
+####################
+# Subtitles
+#
+
+# Auto subtitles
+no-sub
+
+
+
+
+################################3
+# Audio 
+#
+
+# Audio language
+alang=en,eng
+
+# Audio Files
+no-audio-display
+
+# Audio Mixer
+ao=alsa
+no-softvol
+

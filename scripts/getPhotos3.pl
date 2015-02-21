@@ -7,7 +7,7 @@ use Cwd;
 # Configs
 #
 
-$pic_root="/pub/images/new";
+$pic_root="/pub/images/digcam/new";
 $tmp_dir="/tmp";
 $cam_dir="/store_00010001/DCIM/101CANON";
 

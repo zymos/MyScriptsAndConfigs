@@ -20,7 +20,7 @@ sub the_operation {
 	if( not( $file eq '.' || $file eq '..') && -f $file  ) {
 		# print ">";
 		$file2 = $file;
-		$file2 =~ s/^/family_logo-/;
+		$file2 =~ s/\.mp3/-64k.mp3/;
 		# $file2 =~ s/^AMD-//;
 
 		# $file2 =~ s/\.jpg/-1.jpg/;
@@ -34,12 +34,13 @@ sub the_operation {
 		# $file2 =~ s/\)//;
 		# $file2 =~
 
-		# system("convert $file -crop 820x1080+0+0 $file2");
+		system("avconv -i \"$file\" -b:a 64k -ar 22050 \"$file2\"");
 		# system("convert $file -crop 820x1080+820+0 $file3");
 		# print "$file $file2\n";
 		if( $file ne $file2 ){
-			system("mv \"$file\" \"$file2\"");
-			print ">$file\n>>$file2\n";
+			# system("mv \"$file\" \"$file2\"");
+			# system("avconv -i \"$file\" -b:a 64k \"$file2\"");
+			# print ">$file\n>>$file2\n";
 		}else{
 			print "No change: $file\n";
 		}

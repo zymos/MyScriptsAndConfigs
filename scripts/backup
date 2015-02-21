@@ -1,7 +1,7 @@
 #!/bin/bash
 #  backup
 
-Backup_Dir=/mnt/ogre/privy/backup/
+Backup_Dir=/mnt/tb2/privy/backup/
 Backup_username=zymos
 
 Backup_Date=`date +%F`
@@ -23,42 +23,42 @@ mkdir $Backup_username_dir
 cp -r /home/$Backup_username/.[0-9a-zA-Z]* $Backup_username_dir
 cp -r /home/$Backup_username/scriptsPersonal $Backup_username_dir
 
-rm -rf $Backup_username_dir/.wine/drive_c 
-rm -rf $Backup_username_dir/.ccache 
-rm -rf $Backup_username_dir/.cache 
-rm -rf $Backup_username_dir/.mozilla/firefox/*/*Cache 
-rm -rf $Backup_username_dir/.mozilla/firefox/*/extensions
-rm -rf $Backup_username_dir/.mozilla/firefox/*/places.sqlite
-rm -rf $Backup_username_dir/.mozilla/firefox/*/urlclassifier3.sqlite
-rm -rf $Backup_username_dir/.opera/cache4 
-rm -rf $Backup_username_dir/.gqview/metadata 
-rm -rf $Backup_username_dir/.gqview/thumbnails 
-rm -rf $Backup_username_dir/.thumbnails 
-rm -rf $Backup_username_dir/.daimonin/cache 
-rm -rf $Backup_username_dir/.gimp-2.6/tmp 
-rm -rf $Backup_username_dir/.local/share/Trash 
-rm -rf $Backup_username_dir/.opera/images
-rm -rf $Backup_username_dir/.opera/vps
-rm -rf $Backup_username_dir/.opera/cache
-rm -rf $Backup_username_dir/.perltrash/ 
-rm -rf $Backup_username_dir/.wesnoth 
-rm -rf $Backup_username_dir/.winetrickscache 
-rm -rf $Backup_username_dir/.VirtualBox/HardDisks 
-rm -rf $Backup_username_dir/.VirtualBox/Machines/WinXP/Snapshots/ 
-rm -rf $Backup_username_dir/.asc/asc2.cache 
-rm -rf $Backup_username_dir/.macromedia/Flash_Player 
-rm -rf $Backup_username_dir/.adobe/Flash_Player
-rm -rf $Backup_username_dir/.ooo3/user/registry/cache 
-rm -rf $Backup_username_dir/.tmw/updates 
-rm -rf $Backup_username_dir/.wine/dosdevices 
-rm -rf $Backup_username_dir/.vegastrike* 
-rm -rf $Backup_username_dir/.fontconfig 
-rm -rf $Backup_username_dir/.daimonin/srv_files 
-rm -rf $Backup_username_dir/.boxee/UserData/Thumbnails
+/bin/rm -rf $Backup_username_dir/.wine/drive_c 
+/bin/rm -rf $Backup_username_dir/.ccache 
+/bin/rm -rf $Backup_username_dir/.cache 
+/bin/rm -rf $Backup_username_dir/.mozilla/firefox/*/*Cache 
+/bin/rm -rf $Backup_username_dir/.mozilla/firefox/*/extensions
+/bin/rm -rf $Backup_username_dir/.mozilla/firefox/*/places.sqlite
+/bin/rm -rf $Backup_username_dir/.mozilla/firefox/*/urlclassifier3.sqlite
+/bin/rm -rf $Backup_username_dir/.opera/cache4 
+/bin/rm -rf $Backup_username_dir/.gqview/metadata 
+/bin/rm -rf $Backup_username_dir/.gqview/thumbnails 
+/bin/rm -rf $Backup_username_dir/.thumbnails 
+/bin/rm -rf $Backup_username_dir/.daimonin/cache 
+/bin/rm -rf $Backup_username_dir/.gimp-2.6/tmp 
+/bin/rm -rf $Backup_username_dir/.local/share/Trash 
+/bin/rm -rf $Backup_username_dir/.opera/images
+/bin/rm -rf $Backup_username_dir/.opera/vps
+/bin/rm -rf $Backup_username_dir/.opera/cache
+/bin/rm -rf $Backup_username_dir/.perltrash/ 
+/bin/rm -rf $Backup_username_dir/.wesnoth 
+/bin/rm -rf $Backup_username_dir/.winetrickscache 
+/bin/rm -rf $Backup_username_dir/.VirtualBox/HardDisks 
+/bin/rm -rf $Backup_username_dir/.VirtualBox/Machines/WinXP/Snapshots/ 
+/bin/rm -rf $Backup_username_dir/.asc/asc2.cache 
+/bin/rm -rf $Backup_username_dir/.macromedia/Flash_Player 
+/bin/rm -rf $Backup_username_dir/.adobe/Flash_Player
+/bin/rm -rf $Backup_username_dir/.ooo3/user/registry/cache 
+/bin/rm -rf $Backup_username_dir/.tmw/updates 
+/bin/rm -rf $Backup_username_dir/.wine/dosdevices 
+/bin/rm -rf $Backup_username_dir/.vegastrike* 
+/bin/rm -rf $Backup_username_dir/.fontconfig 
+/bin/rm -rf $Backup_username_dir/.daimonin/srv_files 
+/bin/rm -rf $Backup_username_dir/.boxee/UserData/Thumbnails
 
 
-cp /home/$Backup_username/magic_files_home $Backup_Dir
-cp /magic_files $Backup_Dir
+# cp /home/$Backup_username/magic_files_home $Backup_Dir
+# cp /magic_files $Backup_Dir
 
 # tar cvjf $Backup_Dest_Dir/backup-etc-$Backup_Date.tar.gz /etc &> /dev/null
 # tar cvjf $Backup_Dest_Dir/backup-etc-$Backup_Date.tar.gz /etc &> /dev/null

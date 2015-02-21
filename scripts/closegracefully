@@ -1,49 +1,70 @@
 #!/bin/bash
 
 # rtorrent
-if [[ -n `pidof rtorrent` ]];then
-	echo "rtorrent is open, time to die (gracefully)...."
-	(kill -2 `pidof rtorrent` &)
+# if [[ -n `pidof rtorrent` ]];then
+	# echo "rtorrent is open, time to die (gracefully)...."
+	# (kill -2 `pidof rtorrent` &)
+# fi
+
+
+# mozilla firefox...
+if [[ -n `pidof firefox` ]];then
+	echo "closing firefox..."
+    WID=`xdotool search "Mozilla Firefox" | head -1`
+    xdotool windowactivate --sync $WID
+    xdotool key --clearmodifiers ctrl+q
 fi
 
-# echo "closing mozilla (if its open)..."
-# (wmctrl -c mozilla &)
-# sometimes it takes a second shot (see below)
 
-# echo "closing swiftfox (if its open)..."
-# (wmctrl -c swiftfox &)
-# sometimes it takes a second shot (see below)
 
 # galeon...
-if [[ -n `pidof galeon` ]];then
-	echo "closing galeon..."
-	(galeon -q &)
-fi
+# if [[ -n `pidof galeon` ]];then
+	# echo "closing galeon..."
+	# (galeon -q &)
+# fi
 
 # openoffice.org
-echo "closing openOffice (if its open)..."
-(wmctrl -c OpenOffice &)
+# echo "closing openOffice (if its open)..."
+# (wmctrl -c OpenOffice &)
+
+
+# LibreOffice
+if [[ -n `pidof soffice.bin` ]];then
+	echo "closing LibreOffice..."
+	(wmctrl -c LibreOffice &)
+fi
+
+
 
 # Inkscape
-echo "closing Inkscape (if its open)..."
-(wmctrl -c Inkscape &)
+if [[ -n `pidof inkscape` ]];then
+	echo "closing Inkscape..."
+	(wmctrl -c Inkscape &)
+fi
 
 # Gimp
 echo "closing Gimp (if its open)..."
 (wmctrl -c gimp &)
 
 # Pidgin...
-echo "closing pidgin (if its open)..."
-(purple-remote "quit"  &)
+# echo "closing pidgin (if its open)..."
+# (purple-remote "quit"  &)
 
 # qBittorrent
-echo "Closing qBittorrent (if its open)..."
-(wmctrl -c qBittorrent &)
+# echo "Closing qBittorrent (if its open)..."
+# (wmctrl -c qBittorrent &)
 
-# mozilla firefox...
-# echo "closing mozilla again (if its open)..."
-# (wmctrl -c mozilla &)
 
 # echo "closing swiftfox (if its open)..."
 # (wmctrl -c swiftfox &)
+
+# Transmission...
+echo "closing Transmission (if its open)..."
+(wmctrl -c Transmission &)
+
+# Virtualbox
+if [[ -n `pidof VirtualBox` ]];then
+   WID=`VBoxManage list runningvms|sed 's/.*{//'|sed 's/}//'`
+   VBoxManage controlvm $WID savestate 
+fi
 

@@ -12,9 +12,9 @@
 # $FFMPEG_CMD='/opt/ffmpeg-0.11.2/bin/ffmpeg';
 $niceness="nice -n 19 ionice -c2 -n7";
 
-$get_var='source /etc/profile.d/env_vars.sh && echo $FFMPEG_CMD';
-$FFMPEG_CMD=`$get_var`;
-
+# $get_var='source /etc/profile.d/env_vars.sh && echo $FFMPEG_CMD';
+# $FFMPEG_CMD=`$get_var`;
+$FFMPEG_CMD="avconv";
 
 use File::Glob ':glob';
 # Config
@@ -82,6 +82,7 @@ print "starting processes....\n";
 sub the_operation {
 	my $file = $_[0];
 	if( not( $file eq '.' || $file eq '..') && -f $file  ) {
+		$file =~ s/\!/\\\!/;
 		$file2 = $file;
 		$file_name = $file;
 		$file2 =~ s/$/.no.intro.mp4/;
@@ -92,11 +93,14 @@ sub the_operation {
 		print "Processing...\n   $file_name\n";
 		sleep 1;
 		print "   Stage 1 started... ";
-		system("$niceness $FFMPEG_CMD -i \"$file\" $cut_begin_opt $cut_end_opt -vcodec mpeg2video -pix_fmt yuv420p -me_method epzs -threads 4 -r 29.97 -g 45 -bf 2 -trellis 2 -cmp 2 -subcmp 2 -b 2500k -bt 300k -acodec mp2 -ac 2 -ab 192k -ar 44100 -async 1 -y -f vob -y \"/tmp/no.intro.video.tmp.mpg\" \&>> /tmp/ffmpeg.log");
+		$cmd = "$niceness $FFMPEG_CMD -i \"$file\" $cut_begin_opt $cut_end_opt -vcodec mpeg2video -pix_fmt yuv420p -me_method epzs -threads 4 -r 29.97 -g 45 -bf 2 -trellis 2 -cmp 2 -subcmp 2 -b 2500k -bt 300k -acodec mp2 -ac 2 -ab 192k -ar 44100 -async 1 -y -f vob -y \"/tmp/no.intro.video.tmp.mpg\" 2>&1";
+		$cmd_out .= `$cmd`;
 		print "Complete, ";
 		sleep 1;
 		print "Stage 2 started... ";
-		system("$niceness $FFMPEG_CMD -i \"/tmp/no.intro.video.tmp.mpg\" -vcodec libx264 -crf 22 -threads 0 -acodec libfaac -ac 2 -ar 44100 -ab 96k -y \"$file2\" \&>> /tmp/ffmpeg.log");
+		$cmd = "$niceness $FFMPEG_CMD -i \"/tmp/no.intro.video.tmp.mpg\" -vcodec libx264 -crf 22 -threads 0 -acodec libfaac -ac 2 -ar 44100 -ab 96k -y \"$file2\"  2>&1";
+		$cmd_out .= `$cmd`;
+
 		print "Complete.\n";
 	}
 }

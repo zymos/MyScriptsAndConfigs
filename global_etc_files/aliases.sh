@@ -14,6 +14,10 @@ alias sl='ls -h --color -F'
 alias cp='nice -n 19 ionice -c2 -n7 cp -i'
 alias mv='nice -n 19 ionice -c2 -n7 mv -i'
 alias ll='ls -lh'
+alias cd..='cd ..'
+alias bc='bc -l'
+alias ping='ping -c 5'
+
 
 ################
 # Extra aliases
@@ -22,28 +26,23 @@ alias ccp='rsync --recursive --progress --partial --human-readable'
 alias partitions='lsblk -o NAME,RM,SIZE,FSTYPE,MOUNTPOINT'
 
 
-################
-# Basic Applications
-
-alias document.editor='lowriter'
-alias spreadsheet.editor='localc'
-alias image.viewer='geeqie'
-alias mixer='alsamixer'
-alias trash-restore='restore-trash'
-alias disk.utility='palimpsest'
-alias schematic.editor='Fritzing'
 
 ################
 # Prefered apps
-alias ffmpeg='/opt/ffmpeg-2.0.1/bin/ffmpeg'
-alias ffprobe='/opt/ffmpeg-2.0.1/bin/ffprobe'
+# alias ffmpeg='/opt/ffmpeg-2.0.1/bin/ffmpeg'
+# alias ffprobe='/opt/ffmpeg-2.0.1/bin/ffprobe'
 
 alias rm='/usr/bin/trash-put'
-alias rmperm='/bin/rm -rf'
+# alias rmperm='/bin/rm -rf'
 
 alias avidemux2='avidemux2_gtk'
 alias unrar='nice -n 19 ionice -c2 -n7 7z x'
 alias unzip='nice -n 19 ionice -c2 -n7 7z x'
+
+
+################
+# Apps
+alias aafm='/opt/aafm/src/aafm-gui.py;/opt/aafm/src/aafm-gui.py'
 
 
 ################
@@ -54,19 +53,23 @@ alias ps='ps x o pid,comm,args,pcpu,size,state' #prints really nice
 #alias pss='ps o user,pid,comm,args,pcpu,size,state -C bash -N -C xterm |egrep "$USER|USER"|sed "s/^........//"'
 alias nano='nano -w -m' #mouse && nowrap
 # alias i686-w64-mingw32-g++='x86_64-w64-mingw32-g++'
+alias sunflower='(sunflower -t -l "`pwd`">>/tmp/x-programs-error.log 2>&1&)'
+	# open sunflower out of shell with left tab cwd
 
 #################
 # quick shortcuts
-alias mp='mplayer'
+alias fm='sunflower'
+alias mp='mpv'
+alias fmp='mpv --fullscreen'
+alias fmplayer='mplayer -fs'
+alias smplayer='mplayer -shuffle'
+alias lmplayer='mplayer -softvol -softvol-max 300'
 alias dvda='dvd -a'
 alias dvd1='dvd -t 1'
 alias dvd2='dvd -t 2'
 alias dvd3='dvd -t 3'
 alias dvd4='dvd -t 4'
 alias dvd5='dvd -t 5'
-alias fmplayer='mplayer -fs'
-alias smplayer='mplayer -shuffle'
-alias lmplayer='mplayer -softvol -softvol-max 300'
 alias findtext='grep -lr'
 # alias resolution_restore='xrandr -s 1280x1024@75'
 alias sourceftpweb='lftp sftp://zymos000,openiconlibrary@frs.sourceforge.net -e "cd /home/groups/o/op/openiconlibrary/htdocs/"'
@@ -83,9 +86,9 @@ alias boinc_percent_done="boinccmd --get_state|grep 'fraction done'|sed 's/^.*: 
 #################
 # Multi-Command
 alias vbox='sudo modprobe vboxdrv;(VBoxManage startvm 513602ae-0782-4bb7-9c8b-449df3a205c5 &)'
-alias vboxmoduals='for m in vbox{drv,netadp,netflt}; do modprobe $m; done'
+# alias vboxmoduals='for m in vbox{drv,netadp,netflt}; do modprobe $m; done'
 
-alias winekillall="wineserver -k; killall -9 wine wineserver; for i in `ps ax|egrep "*\.exe"|grep -v 'egrep'|awk '{print $1 }'`;do kill -9 $i;done"
+# alias winekillall="wineserver -k; killall -9 wine wineserver; for i in `ps ax|egrep "*\.exe"|grep -v 'egrep'|awk '{print $1 }'`;do kill -9 $i;done"
 
 
 #################
@@ -98,8 +101,8 @@ alias audiobook_improve_voice='mkdir mod;for mp3 in $(ls -1 --color=none *.mp3);
 
 ##################
 # mounts
-alias android-connect="mtpfs -o allow_other /mnt/android"
-alias android-disconnect="fusermount -u /mnt/android"
+# alias android-connect="mtpfs -o allow_other /mnt/android"
+# alias android-disconnect="fusermount -u /mnt/android"
 
 ##################
 # pipe
@@ -122,6 +125,10 @@ function geeqie {	command geeqie "$@" >>/tmp/x-programs-error.log 2>&1 & }
 function gvim {	command gvim "$@" >>/tmp/x-programs-error.log 2>&1 & }
 function localc {	command localc "$@" >>/tmp/x-programs-error.log 2>&1 & }
 function lowriter {	command lowriter "$@" >>/tmp/x-programs-error.log 2>&1 & }
+function xfe {	command xfe "$@" & }
+function pcmanfm {	command pcmanfm "$@" & }
+
+
 # function arduino {	command /opt/arduino/arduino "$@" >>/tmp/x-programs-error.log 2>&1 & }
 # alias transmission='(transmission-gtk&)'
 # alias azureus='(azureus &> /tmp/azureus.log &)'
@@ -149,8 +156,8 @@ if [[ $USER != root ]];then
 #	alias diablo='wine /mnt/oracle/installs/Program\ Files/Diabloi\ II/D2Loader-1.11b.exe'
 #	alias zangband='/usr/games/bin/zangband -mgcu -w'
 #	alias sacredalign='wmctrl -r "Wine desktop" -e 0,0,0,1024,768'
-	alias nwn='wine ~/.wine/drive_c/NeverwinterNights/NWN/nwn.exe'
-	alias icewind='cd /home/zymos/.wine/drive_c/Program\ Files/Black\ Isle/Icewind\ Dale/;wine IDMain.exe'
+	# alias nwn='wine ~/.wine/drive_c/NeverwinterNights/NWN/nwn.exe'
+	# alias icewind='cd /home/zymos/.wine/drive_c/Program\ Files/Black\ Isle/Icewind\ Dale/;wine IDMain.exe'
 fi
 
 
@@ -160,15 +167,30 @@ fi
 if [[ $USER == root ]];then
 	alias grub2-update-conf-j='grub2-mkconfig -o /boot/grub/grub.cfg'
 	alias clamscan='clamscan -r -l /var/log/clamav/scan.log'
-	alias eworld='emerge -u world'
-	alias ereminder_for_cleanup='echo emerge --update --deep --newuse world; echo emerge --depclean; echo revdep-rebuild'
-	alias esync='eix-sync'
-	alias enews='eselect news read new'
+	# alias eworld='emerge -u world'
+	# alias ereminder_for_cleanup='echo emerge --update --deep --newuse world; echo emerge --depclean; echo revdep-rebuild'
+	# alias esync='eix-sync'
+	# alias enews='eselect news read new'
 	alias restartNet0='/etc/init.d/net.eth0 stop ; /etc/init.d/net.lo stop ; /etc/init.d/net.lo start; /etc/init.d/net.eth0 start'
 	alias restartNet1='/etc/init.d/net.eth1 stop ; /etc/init.d/net.lo stop ; /etc/init.d/net.lo start; /etc/init.d/net.eth1 start'
 	alias boincstart='/etc/init.d/boinc start'
 	alias boincstop='/etc/init.d/boinc stop'
 	alias perl_cpan_sh='perl -MCPAN -e shell'
+	alias apt-fix-gpg-keys='apt-get update 2> /tmp/keymissing; for key in $(grep "NO_PUBKEY" /tmp/keymissing |sed "s/.*NO_PUBKEY //"); do echo -e "nProcessing key: $key"; gpg --keyserver subkeys.pgp.net --recv $key && gpg --export --armor $key | apt-key add -; done'
 fi
+
+
+################
+# Basic Applications
+
+alias document.editor='lowriter'
+alias spreadsheet.editor='localc'
+alias image.viewer='geeqie'
+alias mixer='alsamixer'
+alias trash-restore='restore-trash'
+alias disk.utility='palimpsest'
+alias schematic.editor='Fritzing'
+alias file.manager='sunflower'
+alias bittorrent='transmission-gtk'
 
 export ALIASES_SET="true"
